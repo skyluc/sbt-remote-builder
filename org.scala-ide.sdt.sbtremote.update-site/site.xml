@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.scala-ide.sdt.sbtremote.feature_0.0.0.jar" id="org.scala-ide.sdt.sbtremote.feature" version="0.0.0">
+      <category name="org.scala-ide.sdt.sbtremote"/>
+   </feature>
+   <feature url="features/org.scala-ide.sdt.sbtremote.source.feature_0.0.0.jar" id="org.scala-ide.sdt.sbtremote.source.feature" version="0.0.0">
+      <category name="org.scala-ide.sdt.sbtremote-source"/>
+   </feature>
+   <category-def name="org.scala-ide.sdt.sbtremote" label="SBT Remote Builder"/>
+   <category-def name="org.scala-ide.sdt.sbtremote-source" label="SBT Remote Builder Source"/> -->
+</site>
