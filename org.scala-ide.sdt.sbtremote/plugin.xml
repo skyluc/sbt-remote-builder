@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension
+         id="remoteBuilder"
+         name="Remote sbt Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="false">
+         <run
+               class="org.scalaide.sdt.sbtremote.RemoteBuilder">
+         </run></builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.scalaide.sdt.sbtremote.InstallRemoteSbtBuilderHandler"
+            id="org.scala-ide.sdt.sbtremote.installRemoteSbtBuilder"
+            name="Install Remote sbt Builder">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.projectConfigure?after=additions">
+         <command
+               commandId="org.scala-ide.sdt.sbtremote.installRemoteSbtBuilder"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <iterate>
+                     <and>
+                        <adapt
+                              type="org.eclipse.core.resources.IProject">
+                           <test
+                                 property="org.eclipse.core.resources.projectNature"
+                                 value="org.scala-ide.sdt.core.scalanature">
+                           </test>
+                        </adapt>
+                     </and>
+                  </iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
 
 </plugin>

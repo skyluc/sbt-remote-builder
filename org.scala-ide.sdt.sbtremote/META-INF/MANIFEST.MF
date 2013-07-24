@@ -23,7 +23,8 @@ Require-Bundle:
  org.eclipse.ui.ide,
  org.scala-ide.scala.library,
  org.scala-ide.scala.compiler,
- org.scala-ide.sdt.core;bundle-version="[4.0.0, 5.0.0)"
+ org.scala-ide.sdt.core;bundle-version="[4.0.0,5.0.0)",
+ org.eclipse.core.resources
 Import-Package: 
  com.ibm.icu.text;apply-aspects:=false;org.eclipse.swt.graphics;apply-aspects:=false,
  scala.tools.eclipse;apply-aspects:=false,
