@@ -16,7 +16,7 @@
         <artifactId>tycho-surefire-plugin</artifactId>
         <configuration>
           <testSuite>${project.artifactId}</testSuite>
-          <testClass>org.scalaide.sdt.sbtremote.SomeInterestingCodeTest</testClass>
+          <testClass>org.scalaide.sdt.sbtremote.TestSuite</testClass>
         </configuration>
       </plugin>
     </plugins>
