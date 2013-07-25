@@ -30,4 +30,9 @@ Import-Package:
  scala.tools.eclipse;apply-aspects:=false,
  scala.tools.eclipse.contribution.weaving.jdt.ui.javaeditor.formatter;apply-aspects:=false
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ target/lib/sbt-rc-parent.jar,
+ target/lib/sbt-rc-props.jar,
+ target/lib/akka-actor_2.10.jar,
+ target/lib/config.jar,
+ target/lib/io.jar

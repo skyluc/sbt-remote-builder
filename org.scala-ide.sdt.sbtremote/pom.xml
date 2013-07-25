@@ -10,4 +10,48 @@
   <artifactId>org.scala-ide.sdt.sbtremote</artifactId>
   <packaging>eclipse-plugin</packaging>
 
+  <build>
+    <plugins>
+      <plugin>
+        <!-- copy the sbtrc jars, so it can be used in eclipse -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+        <execution>
+            <id>copy</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>com.typesafe.sbtrc</groupId>
+                  <artifactId>sbt-rc-parent</artifactId>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>com.typesafe.sbtrc</groupId>
+                  <artifactId>sbt-rc-props</artifactId>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>com.typesafe.akka</groupId>
+                  <artifactId>akka-actor_2.10</artifactId>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>com.typesafe</groupId>
+                  <artifactId>config</artifactId>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.scala-sbt</groupId>
+                  <artifactId>io</artifactId>
+                </artifactItem>
+              </artifactItems>
+              <stripVersion>true</stripVersion>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
