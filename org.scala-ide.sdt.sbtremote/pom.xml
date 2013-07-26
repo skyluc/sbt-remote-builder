@@ -34,6 +34,14 @@
                   <artifactId>sbt-rc-props</artifactId>
                 </artifactItem>
                 <artifactItem>
+                  <groupId>com.typesafe.sbtrc</groupId>
+                  <artifactId>sbt-rc-controller</artifactId>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>com.typesafe.sbtrc</groupId>
+                  <artifactId>sbt-shim-ui-interface</artifactId>
+                </artifactItem>
+                <artifactItem>
                   <groupId>com.typesafe.akka</groupId>
                   <artifactId>akka-actor_2.10</artifactId>
                 </artifactItem>
@@ -44,6 +52,10 @@
                 <artifactItem>
                   <groupId>org.scala-sbt</groupId>
                   <artifactId>io</artifactId>
+                </artifactItem>
+                <artifactItem>
+                 <groupId>org.scala-sbt</groupId>
+                 <artifactId>sbt-launch</artifactId>
                 </artifactItem>
               </artifactItems>
               <stripVersion>true</stripVersion>

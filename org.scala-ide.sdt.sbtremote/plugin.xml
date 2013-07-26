@@ -8,7 +8,7 @@
       <builder
             hasNature="false">
          <run
-               class="org.scalaide.sdt.sbtremote.RemoteBuilder">
+               class="org.scalaide.sdt.sbtremote.builder.RemoteBuilder">
          </run></builder>
    </extension>
    <extension

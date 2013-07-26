@@ -22,6 +22,7 @@ function fetchAndInstall {
 fetchAndInstall "org.scala-sbt" "launcher-interface" "0.12.4-RC3"
 fetchAndInstall "org.scala-sbt" "io" "0.12.4-RC3"
 fetchAndInstall "org.scala-sbt" "io" "0.13.0-Beta2"
+fetchAndInstall "org.scala-sbt" "sbt-launch" "0.12.4"
 
 cd
 rm -r ${TEMP_FOLDER}

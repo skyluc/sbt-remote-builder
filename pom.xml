@@ -24,6 +24,7 @@
     <akka.version>2.1.2</akka.version>
     <config.version>1.0.0</config.version>
     <sbt.version>0.13.0-Beta2</sbt.version>
+    <sbtlaunch.version>0.12.4</sbtlaunch.version>
   </properties>
 
   <dependencies>
@@ -35,6 +36,16 @@
     <dependency>
       <groupId>com.typesafe.sbtrc</groupId>
       <artifactId>sbt-rc-props</artifactId>
+      <version>${sbtrc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe.sbtrc</groupId>
+      <artifactId>sbt-rc-controller</artifactId>
+      <version>${sbtrc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe.sbtrc</groupId>
+      <artifactId>sbt-shim-ui-interface</artifactId>
       <version>${sbtrc.version}</version>
     </dependency>
     <dependency>
@@ -52,6 +63,12 @@
       <artifactId>io</artifactId>
       <version>${sbt.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.scala-sbt</groupId>
+      <artifactId>sbt-launch</artifactId>
+      <version>${sbtlaunch.version}</version>
+    </dependency>
+
   </dependencies>
 
   <modules>
