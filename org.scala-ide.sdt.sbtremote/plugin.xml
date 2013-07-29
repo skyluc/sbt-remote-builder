@@ -49,5 +49,22 @@
          </command>
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="org.scalaide.sdt.sbtremote.importCategory"
+            name="sbt">
+      </category>
+      <wizard
+            category="org.scalaide.sdt.sbtremote.importCategory"
+            class="org.scalaide.sdt.sbtremote.wizard.ImportSbtBuildWizard"
+            icon="icons/sample.gif"
+            id="org.scalaide.sdt.sbtremote.wizards.ImportSbtBuild"
+            name="Import Sbt Build">
+         <description>
+            Import projects from an sbt build into the workspace
+         </description>
+      </wizard>
+   </extension>
 
 </plugin>
