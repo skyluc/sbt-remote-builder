@@ -19,20 +19,15 @@
   <packaging>pom</packaging>
 
   <properties>
-    <sbtrc.version>1.0-f338da9cf2a5317ad0f28de06c79041644c9b06b</sbtrc.version>
+    <sbtrc.version>1.0-ddcfae863531351cb8622bfde4354b3741ef1bf1</sbtrc.version>
     <sbtrc.repo>Please set me!!</sbtrc.repo>
     <akka.version>2.1.2</akka.version>
     <config.version>1.0.0</config.version>
-    <sbt.version>0.13.0-Beta2</sbt.version>
+    <sbt.version>0.12.4</sbt.version>
     <sbtlaunch.version>0.12.4</sbtlaunch.version>
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>com.typesafe.sbtrc</groupId>
-      <artifactId>sbt-rc-parent</artifactId>
-      <version>${sbtrc.version}</version>
-    </dependency>
     <dependency>
       <groupId>com.typesafe.sbtrc</groupId>
       <artifactId>sbt-rc-props</artifactId>
@@ -40,12 +35,17 @@
     </dependency>
     <dependency>
       <groupId>com.typesafe.sbtrc</groupId>
-      <artifactId>sbt-rc-controller</artifactId>
+      <artifactId>sbt-rc-remote-controller</artifactId>
       <version>${sbtrc.version}</version>
     </dependency>
     <dependency>
       <groupId>com.typesafe.sbtrc</groupId>
-      <artifactId>sbt-shim-ui-interface</artifactId>
+      <artifactId>sbt-rc-ui-interface-0-12</artifactId>
+      <version>${sbtrc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe.sbtrc</groupId>
+      <artifactId>sbt-rc-probe-0-12</artifactId>
       <version>${sbtrc.version}</version>
     </dependency>
     <dependency>

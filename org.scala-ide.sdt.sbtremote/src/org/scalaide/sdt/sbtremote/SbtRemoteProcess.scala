@@ -3,8 +3,6 @@ package org.scalaide.sdt.sbtremote
 import java.io.File
 import akka.actor.ActorRef
 import com.typesafe.sbtrc.SbtProcess
-import com.typesafe.sbtrc.SbtBasicProcessLaunchInfo
-import com.typesafe.sbtrc.BasicSbtProcessLauncher
 import akka.actor.ActorSystem
 import org.eclipse.core.resources.IProject
 import org.scalaide.sdt.sbtremote.builder.SbtrcProperties
@@ -19,6 +17,8 @@ import scala.concurrent.duration._
 import com.typesafe.sbtrc.protocol.NameResponse
 import com.typesafe.sbtrc.protocol.ErrorResponse
 import com.typesafe.sbtrc.protocol.NameRequest
+import com.typesafe.sbtrc.launching.BasicSbtProcessLauncher
+import com.typesafe.sbtrc.launching.SbtBasicProcessLaunchInfo
 
 object SbtRemoteProcess {
 
@@ -40,7 +40,7 @@ object SbtRemoteProcess {
 
   class ProcessLauncher(resources: List[String]) extends BasicSbtProcessLauncher {
 
-    override def getLaunchInfo(version: String): com.typesafe.sbtrc.SbtBasicProcessLaunchInfo =
+    override def getLaunchInfo(version: String): SbtBasicProcessLaunchInfo =
       // TODO: find out why we are not getting the right version of sbt, the value seems to be always '0.12' right now.
       // which doesn't work at all, it is not a valid sbt version
       new ProcessLaunchInfo("0.12.2", resources)
@@ -65,8 +65,8 @@ object SbtRemoteProcess {
       buildRoot,
       new ProcessLauncher(
         List(
-          SbtRemotePlugin.plugin.SbtRcControllerJarLocation,
-          SbtRemotePlugin.plugin.SbtShimUiInterfaceJarLocation,
+          SbtRemotePlugin.plugin.SbtRcUiInterface012JarLocation,
+          SbtRemotePlugin.plugin.SbtRcProbe012JarLocation,
           SbtRemotePlugin.plugin.SbtRcPropsJarLocation)))
 
     child

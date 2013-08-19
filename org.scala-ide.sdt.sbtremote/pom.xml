@@ -27,19 +27,19 @@
               <artifactItems>
                 <artifactItem>
                   <groupId>com.typesafe.sbtrc</groupId>
-                  <artifactId>sbt-rc-parent</artifactId>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>com.typesafe.sbtrc</groupId>
                   <artifactId>sbt-rc-props</artifactId>
                 </artifactItem>
                 <artifactItem>
                   <groupId>com.typesafe.sbtrc</groupId>
-                  <artifactId>sbt-rc-controller</artifactId>
+                  <artifactId>sbt-rc-remote-controller</artifactId>
                 </artifactItem>
                 <artifactItem>
                   <groupId>com.typesafe.sbtrc</groupId>
-                  <artifactId>sbt-shim-ui-interface</artifactId>
+                  <artifactId>sbt-rc-ui-interface-0-12</artifactId>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>com.typesafe.sbtrc</groupId>
+                  <artifactId>sbt-rc-probe-0-12</artifactId>
                 </artifactItem>
                 <artifactItem>
                   <groupId>com.typesafe.akka</groupId>

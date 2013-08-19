@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+# To call:
+# sbt 'set every publishMavenStyle := true' 'set every publishTo := Some(Resolver.file("Local Maven",  new File(Path.userHome.absolutePath+"/tmp/sbt-rc-m2repo")))' clean publish
+# ./populateLocalMavenRepoWithDeps.sh ~/tmp/sbt-rc-m2repo/
+
 set -x
 
 M2_REPO=$1
@@ -20,7 +24,8 @@ function fetchAndInstall {
 
 
 fetchAndInstall "org.scala-sbt" "launcher-interface" "0.12.4-RC3"
-fetchAndInstall "org.scala-sbt" "io" "0.12.4-RC3"
+fetchAndInstall "org.scala-sbt" "launcher-interface" "0.13.0-RC4"
+fetchAndInstall "org.scala-sbt" "io" "0.12.4"
 fetchAndInstall "org.scala-sbt" "io" "0.13.0-Beta2"
 fetchAndInstall "org.scala-sbt" "sbt-launch" "0.12.4"
 

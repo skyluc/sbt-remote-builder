@@ -16,8 +16,8 @@ class SbtRemotePlugin extends AbstractUIPlugin {
   import SbtRemotePlugin._
   
   lazy val SbtLaunchJarLocation = libOsLocationFromBundle("sbt-launch.jar")
-  lazy val SbtRcControllerJarLocation = libOsLocationFromBundle("sbt-rc-controller.jar")
-  lazy val SbtShimUiInterfaceJarLocation = libOsLocationFromBundle("sbt-shim-ui-interface.jar")
+  lazy val SbtRcUiInterface012JarLocation = libOsLocationFromBundle("sbt-rc-ui-interface-0-12.jar")
+  lazy val SbtRcProbe012JarLocation = libOsLocationFromBundle("sbt-rc-probe-0-12.jar")
   lazy val SbtRcPropsJarLocation = libOsLocationFromBundle("sbt-rc-props.jar")
 
   override def start(context: BundleContext) {
