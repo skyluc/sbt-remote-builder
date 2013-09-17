@@ -1,24 +1,23 @@
 package org.scalaide.sdt.sbtremote
 
 import java.io.File
-import akka.actor.ActorRef
-import com.typesafe.sbtrc.SbtProcess
-import akka.actor.ActorSystem
-import org.eclipse.core.resources.IProject
-import org.scalaide.sdt.sbtremote.builder.SbtrcProperties
 import scala.concurrent.Await
-import com.typesafe.sbtrc.protocol.ErrorResponse
-import com.typesafe.sbtrc.protocol.CompileResponse
+import scala.concurrent.duration.DurationInt
 import scala.tools.eclipse.logging.HasLogger
-import akka.pattern.ask
-import akka.util.Timeout
-import com.typesafe.sbtrc.protocol.CompileRequest
-import scala.concurrent.duration._
-import com.typesafe.sbtrc.protocol.NameResponse
-import com.typesafe.sbtrc.protocol.ErrorResponse
-import com.typesafe.sbtrc.protocol.NameRequest
+import org.scalaide.sdt.sbtremote.builder.SbtrcProperties
+import com.typesafe.sbtrc.SbtProcess
 import com.typesafe.sbtrc.launching.BasicSbtProcessLauncher
 import com.typesafe.sbtrc.launching.SbtBasicProcessLaunchInfo
+import com.typesafe.sbtrc.protocol.CompileRequest
+import com.typesafe.sbtrc.protocol.CompileResponse
+import com.typesafe.sbtrc.protocol.ErrorResponse
+import com.typesafe.sbtrc.protocol.NameRequest
+import com.typesafe.sbtrc.protocol.NameResponse
+import akka.actor.ActorRef
+import akka.actor.ActorSystem
+import akka.pattern.ask
+import akka.util.Timeout
+import com.typesafe.sbtrc.io.SbtVersionUtil
 
 object SbtRemoteProcess {
 
@@ -38,20 +37,28 @@ object SbtRemoteProcess {
     }
   }
 
-  class ProcessLauncher(resources: List[String]) extends BasicSbtProcessLauncher {
+  class ProcessLauncher(buildRoot: File) extends BasicSbtProcessLauncher {
 
-    override def getLaunchInfo(version: String): SbtBasicProcessLaunchInfo =
-      // TODO: find out why we are not getting the right version of sbt, the value seems to be always '0.12' right now.
-      // which doesn't work at all, it is not a valid sbt version
-      new ProcessLaunchInfo("0.12.2", resources)
+    override def getLaunchInfo(version: String): SbtBasicProcessLaunchInfo = {
+      // TODO: version contains only the binary version (major.minor). We need the full version
+      // check with the activator guys if it can be improved
+
+      // TODO: fail if we cannot find the full version
+      val fullVersion = SbtVersionUtil.findProjectSbtVersion(buildRoot).get
+
+      version match {
+        case "0.12" =>
+          new ProcessLaunchInfo(fullVersion, SbtRemotePlugin.plugin.resources012, SbtRemotePlugin.plugin.controlerClasspath012)
+        case "0.13" =>
+          new ProcessLaunchInfo(fullVersion, SbtRemotePlugin.plugin.resources013, SbtRemotePlugin.plugin.controlerClasspath013)
+      }
+    }
 
     override def sbtLauncherJar: java.io.File = new File(SbtRemotePlugin.plugin.SbtLaunchJarLocation)
 
   }
 
-  class ProcessLaunchInfo(version: String, resources: List[String]) extends SbtBasicProcessLaunchInfo {
-
-    override def controllerClasspath: Seq[java.io.File] = Nil
+  class ProcessLaunchInfo(version: String, resources: List[String], override val controllerClasspath: Seq[File]) extends SbtBasicProcessLaunchInfo {
 
     override val propsFile: java.io.File = SbtrcProperties.generateFile(version, resources)
 
@@ -60,17 +67,10 @@ object SbtRemoteProcess {
   private def startRemoteSbt(buildRoot: File): ActorRef = {
     val system = ActorSystem("System")
 
-    val child = SbtProcess(
+    SbtProcess(
       system,
       buildRoot,
-      new ProcessLauncher(
-        List(
-          SbtRemotePlugin.plugin.SbtRcUiInterface012JarLocation,
-          SbtRemotePlugin.plugin.SbtRcProbe012JarLocation,
-          SbtRemotePlugin.plugin.SbtRcPropsJarLocation)))
-
-    child
-
+      new ProcessLauncher(buildRoot))
   }
 
 }
@@ -92,7 +92,7 @@ class SbtRemoteProcess private (actor: ActorRef) extends HasLogger {
 
   def getName(): String = {
     Await.result(actor ? NameRequest(sendEvents = false), timeout.duration) match {
-      case NameResponse(n) => {
+      case NameResponse(n, _) => {
         n
       }
       case ErrorResponse(error) =>
@@ -100,5 +100,15 @@ class SbtRemoteProcess private (actor: ActorRef) extends HasLogger {
         "<unknown>"
     }
   }
+
+//  def getKeys(id: String): Seq[ScopedKey] = {
+//    Await.result(actor ? SettingKeyRequest(KeyFilter(None, None, Some(id))), timeout.duration) match {
+//      case KeyListResponse(KeyList(l),) =>
+//        l
+//      case ErrorResponse(error) =>
+//        logger.error(s"Failed to get keys: $error")
+//        Nil
+//    }
+//  }
 
 }

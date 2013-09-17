@@ -1,16 +1,15 @@
 package org.scalaide.sdt.sbtremote.wizard
 
 import java.io.File
-import java.io.FileInputStream
-import java.util.Properties
 import scala.tools.eclipse.util.SWTUtils.fnToPropertyChangeListener
 import org.eclipse.jface.preference.DirectoryFieldEditor
-import org.eclipse.jface.preference.FieldEditor
+import org.eclipse.jface.preference.StringFieldEditor
 import org.eclipse.jface.util.PropertyChangeEvent
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT.NONE
 import org.eclipse.swt.widgets.Composite
-import org.eclipse.jface.preference.StringFieldEditor
+import com.typesafe.sbtrc.SbtUtil
+import com.typesafe.sbtrc.io.SbtVersionUtil
 
 object ImportSbtBuildRootSelectionWizardPage {
 
@@ -25,18 +24,7 @@ object ImportSbtBuildRootSelectionWizardPage {
 
     override def doCheckState(): Boolean = {
       if (super.doCheckState()) {
-        val buildRoot = new File(getStringValue().trim())
-        val buildPropertiesFile = new File(buildRoot, "project/build.properties")
-        if (buildPropertiesFile.exists) {
-          val properties = new Properties()
-          // TODO: need to close the stream?
-          val fileInputStream = new FileInputStream(buildPropertiesFile)
-          properties.load(fileInputStream)
-
-          properties.getProperty("sbt.version") != null
-        } else {
-          false
-        }
+        SbtVersionUtil.findProjectSbtVersion(new File(getStringValue().trim())).isDefined
       } else {
         false
       }

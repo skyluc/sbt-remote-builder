@@ -19,12 +19,12 @@
   <packaging>pom</packaging>
 
   <properties>
-    <sbtrc.version>1.0-ddcfae863531351cb8622bfde4354b3741ef1bf1</sbtrc.version>
-    <sbtrc.repo>Please set me!!</sbtrc.repo>
-    <akka.version>2.1.2</akka.version>
+    <sbtrc.version>1.0-b8ad5dea7b4ddc94ff509bfa49be1b1d62f7203f</sbtrc.version>
+    <sbtrc.repo>http://download.scala-ide.org/tmp-luc/sbt-rc/m2repo/</sbtrc.repo>
+    <akka.version>2.2.0</akka.version>
     <config.version>1.0.0</config.version>
-    <sbt.version>0.12.4</sbt.version>
-    <sbtlaunch.version>0.12.4</sbtlaunch.version>
+    <sbt.version>0.13.0</sbt.version>
+    <sbtlaunch.version>0.13.0</sbtlaunch.version>
   </properties>
 
   <dependencies>
@@ -46,6 +46,16 @@
     <dependency>
       <groupId>com.typesafe.sbtrc</groupId>
       <artifactId>sbt-rc-probe-0-12</artifactId>
+      <version>${sbtrc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe.sbtrc</groupId>
+      <artifactId>sbt-rc-ui-interface-0-13</artifactId>
+      <version>${sbtrc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe.sbtrc</groupId>
+      <artifactId>sbt-rc-probe-0-13</artifactId>
       <version>${sbtrc.version}</version>
     </dependency>
     <dependency>
@@ -84,9 +94,6 @@
       <id>sbtrc</id>
       <name>repository with the sbtrc binaries</name>
       <url>${sbtrc.repo}</url>
-      <snapshots>
-        <updatePolicy>daily</updatePolicy>
-      </snapshots>
     </repository>
   </repositories>
 </project>

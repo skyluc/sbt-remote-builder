@@ -16,10 +16,15 @@ class RemoteBuilder extends IncrementalProjectBuilder with HasLogger {
   }
 
   override def build(kind: Int, args: JMap[String, String], monitor: IProgressMonitor): Array[IProject] = {
+    val sbtProcess = getSbtProcess
 
-    val compilationSuccess = getSbtProcess.compile
+    val compilationSuccess = sbtProcess.compile()
 
     println(s"Compilation result is: $compilationSuccess")
+//    
+//    val keys = sbtProcess.getKeys("baseDirectory")
+//    
+//    println(s"keys:\n ${keys.mkString("\n")}")
     
     // TODO: get the compilation result (errors, ...)
     // TODO: refresh the output folders
