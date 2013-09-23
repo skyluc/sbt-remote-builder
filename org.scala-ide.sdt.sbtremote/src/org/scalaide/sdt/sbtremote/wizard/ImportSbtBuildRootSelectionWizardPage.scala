@@ -8,7 +8,6 @@ import org.eclipse.jface.util.PropertyChangeEvent
 import org.eclipse.jface.wizard.WizardPage
 import org.eclipse.swt.SWT.NONE
 import org.eclipse.swt.widgets.Composite
-import com.typesafe.sbtrc.SbtUtil
 import com.typesafe.sbtrc.io.SbtVersionUtil
 
 object ImportSbtBuildRootSelectionWizardPage {

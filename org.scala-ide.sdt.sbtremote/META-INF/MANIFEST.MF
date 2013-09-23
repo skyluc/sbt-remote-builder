@@ -35,5 +35,6 @@ Bundle-ClassPath: .,
  target/lib/sbt-rc-props.jar,
  target/lib/akka-actor_2.10.jar,
  target/lib/config.jar,
- target/lib/io.jar
+ target/lib/io.jar,
+ target/lib/collections.jar
 Bundle-Activator: org.scalaide.sdt.sbtremote.SbtRemotePlugin

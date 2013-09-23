@@ -18,6 +18,18 @@ import akka.actor.ActorSystem
 import akka.pattern.ask
 import akka.util.Timeout
 import com.typesafe.sbtrc.io.SbtVersionUtil
+import com.typesafe.sbtrc.protocol.SettingKeyRequest
+import com.typesafe.sbtrc.protocol.ScopedKey
+import com.typesafe.sbtrc.protocol.KeyListResponse
+import com.typesafe.sbtrc.protocol.KeyFilter
+import com.typesafe.sbtrc.protocol.KeyListResponse
+import com.typesafe.sbtrc.protocol.KeyList
+import com.typesafe.sbtrc.protocol.TaskKeyRequest
+import com.typesafe.sbtrc.protocol.GenericResponse
+import com.typesafe.sbtrc.protocol.JsonStructure
+import com.typesafe.sbtrc.protocol.TaskResult
+import com.typesafe.sbtrc.protocol.SettingValueRequest
+import com.typesafe.sbtrc.protocol.TaskValueRequest
 
 object SbtRemoteProcess {
 
@@ -101,14 +113,44 @@ class SbtRemoteProcess private (actor: ActorRef) extends HasLogger {
     }
   }
 
-//  def getKeys(id: String): Seq[ScopedKey] = {
-//    Await.result(actor ? SettingKeyRequest(KeyFilter(None, None, Some(id))), timeout.duration) match {
-//      case KeyListResponse(KeyList(l),) =>
-//        l
-//      case ErrorResponse(error) =>
-//        logger.error(s"Failed to get keys: $error")
-//        Nil
-//    }
-//  }
+  def getSettingKeys(id: String): Seq[ScopedKey] = {
+    Await.result(actor ? SettingKeyRequest(KeyFilter.empty), timeout.duration) match {
+      case KeyListResponse(KeyList(l)) =>
+        l.filter(_.key.name == id)
+      case ErrorResponse(error) =>
+        logger.error(s"Failed to get keys: $error")
+        Nil
+    }
+  }
+
+  def getSettingValue(key: ScopedKey): Option[TaskResult[_]] = {
+    Await.result(actor ? SettingValueRequest(key), timeout.duration) match {
+      case GenericResponse("SettingValueRequest", params) =>
+        JsonStructure.unapply[TaskResult[Seq[sbt.Attributed[File]]]](params)
+      case ErrorResponse(error) =>
+        logger.error(s"Failed to get setting value: $error")
+        None
+    }
+  }
+
+  def getTaskKeys(id: String): Seq[ScopedKey] = {
+    Await.result(actor ? TaskKeyRequest(KeyFilter.empty), timeout.duration) match {
+      case KeyListResponse(KeyList(l)) =>
+        l.filter(_.key.name == id)
+      case ErrorResponse(error) =>
+        logger.error(s"Failed to get keys: $error")
+        Nil
+    }
+  }
+
+  def getTaskValue(key: ScopedKey): Option[TaskResult[_]] = {
+    Await.result(actor ? TaskValueRequest(key), timeout.duration) match {
+      case GenericResponse("TaskValueRequest", params) =>
+        JsonStructure.unapply[TaskResult[Seq[sbt.Attributed[File]]]](params)
+      case ErrorResponse(error) =>
+        logger.error(s"Failed to get setting value: $error")
+        None
+    }
+  }
 
 }

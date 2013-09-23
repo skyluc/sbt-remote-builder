@@ -62,6 +62,10 @@
                   <artifactId>io</artifactId>
                 </artifactItem>
                 <artifactItem>
+                  <groupId>org.scala-sbt</groupId>
+                  <artifactId>collections</artifactId>
+                </artifactItem>
+                <artifactItem>
                  <groupId>org.scala-sbt</groupId>
                  <artifactId>sbt-launch</artifactId>
                 </artifactItem>

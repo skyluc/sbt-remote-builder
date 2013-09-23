@@ -1,9 +1,7 @@
 package org.scalaide.sdt.sbtremote.builder
 
-import java.util.{Map => JMap}
-
+import java.util.{ Map => JMap }
 import scala.tools.eclipse.logging.HasLogger
-
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IncrementalProjectBuilder
 import org.eclipse.core.runtime.IProgressMonitor
@@ -21,11 +19,23 @@ class RemoteBuilder extends IncrementalProjectBuilder with HasLogger {
     val compilationSuccess = sbtProcess.compile()
 
     println(s"Compilation result is: $compilationSuccess")
-//    
-//    val keys = sbtProcess.getKeys("baseDirectory")
-//    
-//    println(s"keys:\n ${keys.mkString("\n")}")
-    
+
+    val keys = sbtProcess.getSettingKeys("baseDirectory")
+
+    println(s"keys:\n ${keys.mkString("\n")}")
+
+    val keyValue = sbtProcess.getSettingValue(keys.head)
+
+    println(s"key value: ${keyValue}")
+
+    val taskKeys = sbtProcess.getTaskKeys("fullClasspath")
+
+    println(s"tasks:\n ${taskKeys.mkString("\n")}")
+
+    val taskValue = sbtProcess.getTaskValue(taskKeys.head)
+
+    println(s"task value : ${taskValue}")
+
     // TODO: get the compilation result (errors, ...)
     // TODO: refresh the output folders
 

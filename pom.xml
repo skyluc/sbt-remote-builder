@@ -19,7 +19,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <sbtrc.version>1.0-b8ad5dea7b4ddc94ff509bfa49be1b1d62f7203f</sbtrc.version>
+    <sbtrc.version>1.0-93069d2b6b47b824c5e5a9efbd72cebaed6ef8db</sbtrc.version>
     <sbtrc.repo>http://download.scala-ide.org/tmp-luc/sbt-rc/m2repo/</sbtrc.repo>
     <akka.version>2.2.0</akka.version>
     <config.version>1.0.0</config.version>
@@ -71,6 +71,11 @@
     <dependency>
       <groupId>org.scala-sbt</groupId>
       <artifactId>io</artifactId>
+      <version>${sbt.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scala-sbt</groupId>
+      <artifactId>collections</artifactId>
       <version>${sbt.version}</version>
     </dependency>
     <dependency>
